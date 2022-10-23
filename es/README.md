@@ -8,7 +8,7 @@
 
 ## Usage
 
-prepare a IDL file 'monster.fbs', set path to flatc
+prepare a [IDL](https://google.github.io/flatbuffers/md__schemas.html) file 'monster.fbs', set path to flatc
 ```bash
 cd es/example
 # schemaファイルからTypeScriptを生成

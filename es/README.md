@@ -1,6 +1,6 @@
 # flatbuffers-es
 
-[flatbuffers](..) ES modules version.
+[google/flatbuffers](https://github.com/google/flatbuffers) ES modules version.
 
 ## Demo
 

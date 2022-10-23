@@ -6,6 +6,39 @@
 
 - [read monster.bin in flatbuffers on browser](https://code4fukui.github.io/flatbuffers-es/es/example/)
 
+## Usage
+
+prepare a IDL file 'monster.fbs', set path to flatc
+```bash
+# schemaファイルからTypeScriptを生成
+flatc --ts --ts-flat-files monster.fbs
+# flatbuffers-esをローカルにコピー
+deno bundle https://code4fukui.github.io/flatbuffers-es/es/index.js > ./fb.js
+# importを書き換える
+gsed -i "s/'flatbuffers'/'.\/fb.js'/" monster_generated.ts
+# TypeScriptをJavaScriptに変える
+bash -c tsc -p ./tsconfig.json monster_generated.ts 
+# importを書き換える
+gsed -i "s/'.\/fb.js'/'https:\/\/code4fukui.github.io\/flatbuffers-es\/es\/index.js'/" monster_generated.js
+```
+
+from browsers or Deno
+```JavaScript
+import * as flatbuffers from "https://code4fukui.github.io/flatbuffers-es/es/index.js";
+import * as Sample from"./monster_generated.js";
+
+const MyGame = { Sample };
+
+const bytes = new Uint8Array(await (await fetch("./monster.bin")).arrayBuffer());
+const buf = new flatbuffers.ByteBuffer(bytes);
+const monster = MyGame.Sample.Monster.getRootAsMonster(buf);
+
+const hp = monster.hp();
+const mana = monster.mana();
+const name = monster.name();
+console.log({ hp, mana, name });
+```
+
 ## How to build
 
 ### compile flatc
@@ -63,36 +96,4 @@ result
 196byte monster.bin
 147byte monster.cbor
 233byte monster.json
-```
-
-## Usage
-
-prepare a IDL file 'monster.fbs', set path to flatc
-```bash
-flatc --ts --ts-flat-files monster.fbs
-# flatbuffersをローカルにコピー
-deno bundle https://code4fukui.github.io/flatbuffers-es/es/index.js > ./fb.js
-# importを書き換える
-gsed -i "s/'flatbuffers'/'.\/fb.js'/" monster_generated.ts
-# TypeScriptをJavaScriptに変える
-bash -c tsc -p ./tsconfig.json monster_generated.ts 
-# importを書き換える
-gsed -i "s/'.\/fb.js'/'https:\/\/code4fukui.github.io\/flatbuffers-es\/es\/index.js'/" monster_generated.js
-```
-
-from browsers or Deno
-```JavaScript
-import * as flatbuffers from "https://code4fukui.github.io/flatbuffers-es/es/index.js";
-import * as Sample from"./monster_generated.js";
-
-const MyGame = { Sample };
-
-const bytes = new Uint8Array(await (await fetch("./monster.bin")).arrayBuffer());
-const buf = new flatbuffers.ByteBuffer(bytes);
-const monster = MyGame.Sample.Monster.getRootAsMonster(buf);
-
-const hp = monster.hp();
-const mana = monster.mana();
-const name = monster.name();
-console.log({ hp, mana, name });
 ```

@@ -10,6 +10,7 @@
 
 prepare a IDL file 'monster.fbs', set path to flatc
 ```bash
+cd es/example
 # schemaファイルからTypeScriptを生成
 ../..flatc --ts --ts-flat-files monster.fbs
 # flatbuffers-esをローカルにコピー

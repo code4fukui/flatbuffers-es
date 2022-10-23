@@ -11,13 +11,13 @@
 prepare a IDL file 'monster.fbs', set path to flatc
 ```bash
 # schemaファイルからTypeScriptを生成
-flatc --ts --ts-flat-files monster.fbs
+../..flatc --ts --ts-flat-files monster.fbs
 # flatbuffers-esをローカルにコピー
 deno bundle https://code4fukui.github.io/flatbuffers-es/es/index.js > ./fb.js
 # importを書き換える
 gsed -i "s/'flatbuffers'/'.\/fb.js'/" monster_generated.ts
 # TypeScriptをJavaScriptに変える
-bash -c tsc -p ./tsconfig.json monster_generated.ts 
+tsc --target es6 monster_generated.ts 
 # importを書き換える
 gsed -i "s/'.\/fb.js'/'https:\/\/code4fukui.github.io\/flatbuffers-es\/es\/index.js'/" monster_generated.js
 ```
@@ -66,7 +66,7 @@ cd es/example
 # importを書き換える
 gsed -i "s/'flatbuffers'/'.\/..\/index.js'/" monster_generated.ts
 # TypeScriptをJavaScriptに変える
-bash -c tsc -p ./tsconfig.json monster_generated.ts 
+tsc --target es6 monster_generated.ts 
 ```
 
 ## write test

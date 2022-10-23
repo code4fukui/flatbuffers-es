@@ -4,7 +4,7 @@
 
 ## Demo
 
-- [https://code4fukui.github.io/flatbuffers-es/es/example/](read monster.bin in flatbuffers on browser)
+- [read monster.bin in flatbuffers on browser](https://code4fukui.github.io/flatbuffers-es/es/example/)
 
 ## How to build
 

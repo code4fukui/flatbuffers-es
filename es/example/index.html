@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<script type="module">
+import * as flatbuffers from "https://code4fukui.github.io/flatbuffers-es/es/index.js";
+import * as Sample from"./monster_generated.js";
+
+const MyGame = { Sample };
+
+const bytes = new Uint8Array(await (await fetch("./monster.bin")).arrayBuffer());
+const buf = new flatbuffers.ByteBuffer(bytes);
+const monster = MyGame.Sample.Monster.getRootAsMonster(buf);
+
+const hp = monster.hp();
+const mana = monster.mana();
+const name = monster.name();
+document.body.innerHTML = JSON.stringify({ hp, mana, name });
+</script>

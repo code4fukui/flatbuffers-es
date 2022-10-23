@@ -1,0 +1,1 @@
+{"pos":{"x":1,"y":2,"z":3},"mana":150,"hp":100,"name":"Orc","inventory":[0,1,2,3,4,5,6,7,8,9],"color":2,"weapons":[{"name":"Sword","damage":3},{"name":"Axe","damage":3}],"equipped":"","path":[{"x":1,"y":2,"z":3},{"x":4,"y":5,"z":6}]}
